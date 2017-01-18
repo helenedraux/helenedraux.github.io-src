@@ -60,7 +60,7 @@ SITEIMAGE = '/images/compass2.png width=100 height=100'
 DESCRIPTION = 'Portfolio with data science projects and visualisation'
 
 LINKS = (
-    ('www', 'http://www.helenedraux.net/'),
+    ('www', 'https://www.helenedraux.net/'),
 )
 
 ICONS = [
