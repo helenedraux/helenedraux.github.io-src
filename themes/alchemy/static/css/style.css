@@ -1,0 +1,294 @@
+::selection {
+  background: #0085a1;
+  color: #fff;
+  text-shadow: none;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+a {
+  color: #333;
+}
+
+a:focus,
+a:hover {
+  color: #0085a1;
+}
+
+blockquote {
+  color: #818a91;
+  font-style: italic;
+}
+
+hr {
+  margin: 0.5rem 0;
+}
+
+p{
+  line-height: 1.6rem;
+}
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ffb7b7; /* Gecko Browsers */
+}
+
+ul{
+  list-style-type: square;
+}
+
+/* ------------------------------------------------------------------------- */
+/*
+HEADINGS
+*/
+h1,h2,h3,h4{
+  /*font-family: 'Sansita One', cursive;*/
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 1em 0 .5em 0;
+  padding: 0 0 .25em 0;
+}
+
+.container {
+  max-width: 960px;
+  width: 70%;
+}
+
+.header,
+.footer {
+  padding: 1.5rem 0 .5rem;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.header img {
+  margin-bottom: 1rem;
+  -ms-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  transform: rotate(-20deg);
+}
+.header img:hover{
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(7deg);
+}
+
+.header .title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.header ul,
+.header li {
+  margin-bottom: .5rem;
+}
+
+.header ul {
+  font-size: 1.25rem;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+.main {
+  background-color: #fff;
+  padding: 3.5rem 0;
+}
+
+.footer {
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.highlight pre {
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 1rem;
+  border-left: 3px solid red;
+  background: rgba(255, 5, 10, 0.04);
+}
+
+.pagination .page-link {
+  color: #333;
+}
+
+.row.teaser{
+  padding: 50px 0 50px 0;
+}
+
+.teaser header ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.teaser header li {
+  margin-bottom: .5rem;
+}
+
+.teaser .content p {
+  margin-bottom: 0;
+}
+
+.article header ul,
+.article header li {
+  margin-bottom: .5rem;
+}
+
+.article header li:not(:last-child) {
+  margin-right: 10px;
+}
+
+.article .content a {
+  text-decoration: underline;
+}
+
+/******************
+HEADER
+*******************/
+
+h1.title {
+  font-family: 'Sansita One', cursive;
+  text-decoration: none;
+  color: rgb(76, 76, 76);
+  margin:0;
+  padding: 0;
+  border-bottom: none;
+}
+
+h1.title a{
+  text-decoration: none;
+  color: rgb(255, 5, 7);
+}
+h1.title a:hover{
+  text-decoration: none;
+  color: rgb(76, 76, 76);
+  margin:0;
+  padding: 0;
+  border-bottom: none;
+}
+
+#header_subtitle h4{
+  font-family: 'Sansita One', cursive;
+  margin:0;
+  padding: 0;
+  border-bottom: none;
+}
+
+@media (min-width: 576px) {
+  .header .title {
+    font-size: 2.5rem;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .header,
+  .footer {
+    text-align: center;
+  }
+
+  .teaser header li {
+    display: inline-block;
+  }
+
+  .teaser header li:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+#header_subtitle{
+  text-align: right;
+}
+#header_links{
+  text-align: right;
+}
+#header_links a:hover{
+  text-decoration: none;
+  color:initial;
+  border-bottom: 2px solid red;
+}
+/*******
+Footer
+********/
+#themeauthor{
+  font-size: 12px;
+}
+
+/*For iPython Notebook*/
+.innercell, 
+.output_subarea.output_stream.output_stdout.output_text{
+  max-width: 700px;
+  overflow-wrap: break-word;
+}
+
+.text_cell_render.border-box-sizing.rendered_html h1{
+  font-size: 2rem;
+}
+#toggleCodeBtn{
+  text-align:  right;
+}
+#toogleCode{
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+/****************
+INDEX
+****************/
+.headertitle {
+  padding-bottom: 20px;
+}
+
+.featuredimage img{
+  width: 100%;
+  line-height: 0;
+  display: inline-block;
+  border: solid 4px #FFFFFF;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  transition: all 200ms ease-out;
+}
+
+/****************
+NOTEBOOK
+****************/
+.output_wrapper{
+  font-size: 0.8rem;
+  line-height: 1;
+}
+div.input_prompt{
+  display: none;
+}
+
+/***************
+ARTICLES
+***************/
+.article .content a{
+  text-decoration: none;
+  background-color: rgba(236, 0, 0, 0.15);
+  border-bottom: 2px solid red;
+}
+.bk-logo.bk-logo-small.bk-logo-notebook,
+.bk-root .bk-toolbar-left .bk-logo, 
+.bk-root .bk-toolbar-right .bk-logo{
+  background-color: unset;
+  border: none;
+}
+.article_title h1 {
+  font-family: 'Sansita One', cursive;
+  font-size: 2rem;
+  border: none;
+}
+.highlight{
+  font-size: 12px;
+  overflow-wrap: break-word
+}
+/******************
+INDEX
+******************/
+h4.title {
+  font-size: 2rem;
+  border: none;
+  margin: 0px;
+}
