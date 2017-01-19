@@ -2,28 +2,21 @@ import sys
 from datetime import datetime
 
 TEMPLATE = """
-{title}
-{hashes}
-
-:date: {year}-{month}-{day} {hour}:{minute:02d}
-:tags:
-:category:
-:slug: {slug}
-:summary:
-:status: draft
-:images: 
-
+Title: {title}
+Date: {year}-{month:02d}-{day:02d} {hour}:{minute:02d}
+Category: 
+Tags: 
+Slug: {slug}
+Summary: 
+Status: draft
+Image: /images/
 
 """
-
-
 def make_entry(title):
     today = datetime.today()
     slug = title.lower().strip().replace(' ', '-')
-    f_create = "content/{}_{:0>2}_{:0>2}_{}.rst".format(
-        today.year, today.month, today.day, slug)
+    f_create = "content/{}.md".format(slug)
     t = TEMPLATE.strip().format(title=title,
-                                hashes='#' * len(title),
                                 year=today.year,
                                 month=today.month,
                                 day=today.day,
@@ -34,10 +27,9 @@ def make_entry(title):
         w.write(t)
     print("File created -> " + f_create)
 
-
 if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         make_entry(sys.argv[1])
     else:
-        print "No title given"
+        print('Need a "Title"')

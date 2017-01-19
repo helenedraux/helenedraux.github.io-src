@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Hélène'
 SITENAME = 'Data science w/ a geo bias'
-SITEURL = ''
+SITEURL = 'http://localhost:8000'
 
 PATH = 'content'
 
@@ -41,7 +41,7 @@ EXTRA_PATH_METADATA = {
 MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup','pelican-bootstrapify']
+PLUGINS = ['ipynb.markup','pelican-bootstrapify','related_posts']
 
 BOOTSTRAPIFY = {
     'table': ['table', 'table-striped', 'table-hover'],
@@ -50,6 +50,9 @@ BOOTSTRAPIFY = {
 }
 
 #MARKDOWN = ['toc']
+
+# For the related post plugin
+RELATED_POSTS_MAX = 10
 
 # Theme settings --------------------------------------------------------------
 
@@ -60,11 +63,11 @@ SITEIMAGE = '/images/compass2.png width=100 height=100'
 DESCRIPTION = 'Portfolio with data science projects and visualisation'
 
 LINKS = (
-    ('www', 'https://www.helenedraux.net/'),
+    ('www', 'http://www.helenedraux.net/'),
 )
 
 ICONS = [
-    ('github', 'https://github.com/nairobilug/pelican-alchemy'),
+    ('github', 'https://github.com/helenedraux'),
 ]
 
 PYGMENTS_STYLE = 'lovelace'
@@ -82,3 +85,11 @@ DISPLAY_PAGES_ON_MENU = True
 GOOGLE_ANALYTICS = 'UA-90338324-1'
 
 HIDE_CATEGORY = True
+
+DISQUS_SITENAME = "helenedraux.github.io"
+
+#For the tag cloud
+import math
+JINJA_FILTERS = {
+    'count_to_font_size': lambda c: '{p:.1f}%'.format(p=100 + 25 * math.log(c, 2)),
+}

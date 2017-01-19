@@ -38,7 +38,9 @@ To create a script that would hide and show the elements of code, I first publis
 
 ```
 
-I noticed that there was only one class different between both div: `text_cell` or `code_cell`. Well named I guess! My idea was then to write a javascript function which adds a `button` before `code_cell` and hides/shows the `code_cell`. Once I've added a button, the HTML code would become like this:
+I noticed that there was only one class different between both div: `text_cell` or `code_cell`. Well named I guess! 
+
+My idea was then to write a JavaScript function to add a `button` before `code_cell` and hides/shows the `code_cell`. Once the button is added, the HTML code would become like this:
 
 ```
 <div class="cell border-box-sizing text_cell rendered">
@@ -72,23 +74,31 @@ The code that I want to add is therefore the `nextElementSibling`. However, if t
 
 # Code
 
+I prefer not using jQuery when I can; although I eventually had to use it for Bokeh, it can substantially slow the page load, so if you can avoid, for small projects it's worth learning pure JavaScript ().
+
 ## Custom.js
 
 I started by creating a `custom.js` file in the folder `theme/(nameofmytheme)/static/js` since there wasn't any before. 
 
-In the file, I wrote the code below. Note that I use bootstrap, and therefore I use their button style.
+In the file, I wrote the code below. Note that I use bootstrap, and therefore I use their button style (`btn btn-danger btn-sm`).
 
 	:::JavaScript
+	// We initiate without showing the code.
 	var code_shown = false;
+	// We add an event listener to the DOM, so it only runs once the document is ready (otherwise your elements might not exist yet.)
 	document.addEventListener("DOMContentLoaded",function(){
+	  // We select the div that have the className including 'code_cell'
 	  var cellstohide_wrapper = document.getElementsByClassName('cell border-box-sizing code_cell rendered');
-	  console.log(cellstohide_wrapper);
 	  var nbcell_wrapper= cellstohide_wrapper.length;
+	  // We loop through all of them to add the button and hide the relevant divs.
 	  for (var i=0;i<nbcell_wrapper;i++){
+	  	  // Super neat function to add before an element. Similar to jQuery, but pure JavaScript..
 	      cellstohide_wrapper[i].insertAdjacentHTML('beforebegin', '<button class="btn btn-danger btn-sm" id="toggleCodeBtn_'+ i +'" value="Show Code" onclick="code_toggle(event)">Reveal code</button>');
+	        // We loop now through all the children to find those with the class "input"
 	        for (var k = 0; k < cellstohide_wrapper[i].childNodes.length; k++) {
 	                elementToReturn = cellstohide_wrapper[i].childNodes[k];
 	                if (elementToReturn.className == 'input') {
+	                	// and now through all their children to hide the cells with the class "prompt input_prompt" and "inner_cell"
 	                    for (var j=0; j < elementToReturn.childNodes.length; j++) {
 	                      childtohide = elementToReturn.childNodes[j];
 	                      if (childtohide.className == 'prompt input_prompt' || 
@@ -101,10 +111,12 @@ In the file, I wrote the code below. Note that I use bootstrap, and therefore I 
 	            }
 	  }
 	});
+	// We define a function which will be called when we click on the button
 	code_toggle = function(event) {
-	  	console.log(event.target.id);
+		// We capture the element that is after the button
 	    var baseElement = event.target.nextElementSibling;
-	    console.log(baseElement);
+	    // If the code was shown, we hide it, and vice versa.
+	    // The code now is similar to the initiation state.
 	    if (code_shown){
 	        for (var i = 0; i < baseElement.childNodes.length; i++) {
 	                elementToReturn = baseElement.childNodes[i];
@@ -118,6 +130,7 @@ In the file, I wrote the code below. Note that I use bootstrap, and therefore I 
 	                    }
 	                }
 	            }
+	        // Change the value of the button
 	        document.getElementById(event.target.id).innerHTML = 'Reveal code'
 	      } else {
 	        for (var i = 0; i < baseElement.childNodes.length; i++) {
@@ -134,7 +147,7 @@ In the file, I wrote the code below. Note that I use bootstrap, and therefore I 
 	            }
 	        document.getElementById(event.target.id).innerHTML = 'Hide code';
 	      }
-	        code_shown = !code_shown;
+		code_shown = !code_shown;
 	 }
 
 
@@ -148,3 +161,4 @@ Then I needed to tell my theme to load `custom.js`. I went to `theme/(nameofmyth
 
 ## Et voilà! 
 
+With a bit of javascript and CSS, it is very easy to hack this! Besides, it means you don't need to take care of a plugin 'block box' that you don't understand; now you know why and how this works.

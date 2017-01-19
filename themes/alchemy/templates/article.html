@@ -57,4 +57,37 @@
   </div>
 </article>
 {% include 'include/comments.html' %}
+{% if article.related_posts %}
+<!-- https://codepen.io/ncerminara/pen/gpVXxz -->
+      <div class="relatedposts">
+          <h1><small>Related posts</small></h1>
+          <div class="card-deck-wrapper">
+              <div class="card-deck">
+              <ul class="post-list">
+              {% for related_post in article.related_posts %}
+                  <li>
+                    <div class="card col-sm-4">
+                        <a href="{{ SITEURL }}/{{ related_post.url }}">
+                          <img class="card-img-top img-responsive img-feat-rel" src="{{ related_post.metadata.image }}">
+                        </a>
+                        <div class="card-block">
+                            <h4 class="card-title"><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></h4>
+                            <p class="card-text">{{ related_post.metadata.description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                {% for tag in related_post.tags %}
+                                    <a href="{{ SITEURL }}/{{ tag.url }}" class="taglink">#{{ tag }}</a>
+                                    {% if not loop.last %} {% endif %}
+                                {% endfor %}
+                            </small>
+                            </p>
+                        </div>
+                    </div>
+                  </li>
+              {% endfor %}
+              </ul>
+              </div>
+          </div>
+      </div>
+{% endif %}
 {% endblock %}

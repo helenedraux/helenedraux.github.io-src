@@ -12,35 +12,29 @@
 {% endblock %}
 
 {% block page_header %}
-<div class="headertitle">
-  Articles published here
-</div>
+
 {% endblock %}
 
 {% block content %}
+<div class="headertitle">
+<p  class="lead"><strong>Welcome</strong> to my geo tech blog, where I present some of my projects.</p>
+  <div class="alltags">
+  <ul class="tagcloud list-inline">
+        <li class="list-inline-item" style="font-size: {{ articles|count|count_to_font_size }};">
+              <a href="{{ SITEURL }}" class="taglink">All</a>
+          </li>
+       {%- for tag, articles in tags|sort %}
+          <li class="list-inline-item" style="font-size: {{ articles|count|count_to_font_size }};">
+              <a href="{{ SITEURL }}/{{ tag.url }}"  class="taglink">#{{ tag }}</a>
+          </li>
+        {% endfor %}
+  </ul>
+  </div>
+</div>
+
 {% for article in articles_page.object_list %}
 <article class="row teaser">
   <header class="col-sm-4 text-muted">
-    <!--ul>
-      <li title="{{ article.date.isoformat() }}">
-        <i class="fa fa-clock-o"></i>
-        {{ article.locale_date }}
-      </li>
-      {% if not HIDE_CATEGORY %}
-      <li>
-        <i class="fa fa-folder-open-o"></i>
-        <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
-      </li>
-      {% endif %}
-      {% if not HIDE_AUTHORS and article.authors %}
-      <li>
-        <i class="fa fa-user-o"></i>
-        {% for author in article.authors %}
-        <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>{% if not loop.last %}, {% endif %}
-        {% endfor %}
-      </li>
-      {% endif %}
-    </ul-->
     {% if article.metadata.image %}
       <a href="{{ SITEURL }}/{{ article.url }}">
         <div class="image featuredimage">
@@ -59,7 +53,7 @@
     <ul class='list-inline'>
       <li class="list-inline-item">
         {% for tag in article.tags %}
-        <a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
+        <a href="{{ SITEURL }}/{{ tag.url }}" class="taglink">#{{ tag }}</a>
         {% endfor %}
       </li>
     </ul>

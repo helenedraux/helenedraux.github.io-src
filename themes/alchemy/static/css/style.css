@@ -76,11 +76,13 @@ h3{
   -ms-transform: rotate(-20deg);
   -webkit-transform: rotate(-20deg);
   transform: rotate(-20deg);
+  border: none;
 }
 .header img:hover{
   -ms-transform: rotate(7deg);
   -webkit-transform: rotate(7deg);
   transform: rotate(7deg);
+  border: none;
 }
 
 .header .title {
@@ -110,10 +112,9 @@ h3{
 }
 
 .highlight pre {
-  border: 1px solid rgba(0,0,0,.1);
   padding: 1rem;
-  border-left: 3px solid red;
-  background: rgba(255, 5, 10, 0.04);
+  border-left: 2px solid rgb(209, 4, 6);
+  background: rgba(255, 5, 10, 0.02);
 }
 
 .pagination .page-link {
@@ -157,7 +158,7 @@ HEADER
 h1.title {
   font-family: 'Sansita One', cursive;
   text-decoration: none;
-  color: rgb(76, 76, 76);
+  color: rgb(209, 4, 6);
   margin:0;
   padding: 0;
   border-bottom: none;
@@ -165,11 +166,11 @@ h1.title {
 
 h1.title a{
   text-decoration: none;
-  color: rgb(255, 5, 7);
+  color: rgb(209, 4, 6);
 }
 h1.title a:hover{
   text-decoration: none;
-  color: rgb(76, 76, 76);
+  color: rgba(209, 4, 6,0.5);
   margin:0;
   padding: 0;
   border-bottom: none;
@@ -213,7 +214,7 @@ h1.title a:hover{
 #header_links a:hover{
   text-decoration: none;
   color:initial;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid rgb(209, 4, 6);
 }
 /*******
 Footer
@@ -245,6 +246,7 @@ INDEX
 ****************/
 .headertitle {
   padding-bottom: 20px;
+  text-align: center;
 }
 
 .featuredimage img{
@@ -274,8 +276,14 @@ ARTICLES
 ***************/
 .article .content a{
   text-decoration: none;
-  background-color: rgba(236, 0, 0, 0.15);
-  border-bottom: 2px solid red;
+  background-color: rgba(236, 0, 0, 0.04);
+  border-bottom: 2px solid rgb(209, 4, 6);
+}
+.article .content a:hover{
+  text-decoration: none;
+  background-color: rgba(236, 0, 0, 0.14);
+  border-bottom: 2px solid rgb(209, 4, 6);
+  color: inherit;
 }
 .bk-logo.bk-logo-small.bk-logo-notebook,
 .bk-root .bk-toolbar-left .bk-logo, 
@@ -289,8 +297,12 @@ ARTICLES
   border: none;
 }
 .highlight{
-  font-size: 12px;
+  font-size: 13px;
   overflow-wrap: break-word
+}
+.img-fluid{
+  border: 1px solid grey;
+  padding: 2px;
 }
 /******************
 INDEX
@@ -299,4 +311,67 @@ h4.title {
   font-size: 2rem;
   border: none;
   margin: 0px;
+}
+h4.title a:focus,h4.title a:hover{
+  text-decoration: none;
+  color: rgb(209, 4, 6);
+}
+.alltags{
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+}
+/******************
+RELATED POSTS
+*******************/
+.relatedposts{  
+  width: 100%;
+}
+ul.post-list{
+  padding: 0px 20px 0px 0px;
+  list-style-type: none;
+}
+.img-feat-rel{
+  width: 100%;
+  border-bottom: 1px solid rgba(210, 210, 210,0.5);
+}
+h4.card-title{
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+}
+h4.card-title a:focus, h4.card-title a:hover{
+  text-decoration: underline;
+  color: initial;
+}
+div.card.col-sm-4{
+  padding:0px;
+  margin-right: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: .25s box-shadow;
+  transition: .25s box-shadow;
+}
+div.card.col-sm-4:hover, div.card.col-sm-4:focus{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.card-block{
+  padding:1rem;
+}
+.card-text{
+  padding-top: 10px;
+  font-size: 0.8rem;
+  line-height: 1rem;
+}
+.taglink{
+  padding: 3px;
+}
+.taglink:focus, .taglink:hover{
+  border: 1px solid rgba(220,220,220,0.6);
+  border-radius: 2px;
+  padding: 2px;
+  background-color: rgba(220,220,220,0.5);
+  text-decoration: none;
+  color: inherit;
 }

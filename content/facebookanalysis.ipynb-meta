@@ -1,8 +1,8 @@
-Title: Facebook analysis
-Slug: Facebook analysis
-Date: 2017-01-12 20:05
+Title: NLP of a Facebook Page
+Slug: NLP analysis
+Date: 2017-01-19 20:05
 Category: posts
-Tags: python, facebook, analysis, pandas
+Tags: python, facebook, analysis, pandas, NLTK, Bokeh
 Author: Hélène
-Description: Analysis of Parkinson's UK Facebook Page, using pandas.
+Description: Analysis of Parkinson's UK Facebook Page using pandas, NLTK, and Bokeh.
 Image: /images/facebook.png
