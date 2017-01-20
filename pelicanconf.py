@@ -86,7 +86,7 @@ GOOGLE_ANALYTICS = 'UA-90338324-1'
 
 HIDE_CATEGORY = True
 
-DISQUS_SITENAME = "helenedraux.github.io"
+DISQUS_SITENAME = "helenedraux-github-io"
 
 #For the tag cloud
 import math
