@@ -318,7 +318,7 @@ h4.title a:focus,h4.title a:hover{
 }
 .alltags{
   text-align: center;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 }
 /******************
@@ -346,12 +346,21 @@ h4.card-title a:focus, h4.card-title a:hover{
   color: initial;
 }
 div.card.col-sm-4{
-  padding:0px;
-  margin-right: 10px;
+  padding-right: 2px;
+  padding-left: 2px;
   overflow: hidden;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .25s box-shadow;
   transition: .25s box-shadow;
+}
+.col-sm-4.card-wrapper{
+  padding: 2px;
+}
+.card.related-art{
+  height: 320px;
+}
+.card-img-top.img-responsive.img-feat-rel{
+  height: 150px;
 }
 div.card.col-sm-4:hover, div.card.col-sm-4:focus{
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -374,4 +383,13 @@ div.card.col-sm-4:hover, div.card.col-sm-4:focus{
   background-color: rgba(220,220,220,0.5);
   text-decoration: none;
   color: inherit;
+}
+.footer-rel{
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  padding: 0;
+}
+.footer-text{
+  padding: 0 0.5rem 0.5rem 1rem;
 }

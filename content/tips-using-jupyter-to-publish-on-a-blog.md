@@ -1,6 +1,6 @@
 Title: Tips using Jupyter to publish on a blog
 Date: 2017-01-19 7:53
-Category: 
+Category: coding
 Tags: jupyter, notebook, python, css
 Slug: tips-using-jupyter-to-publish-on-a-blog
 Summary: A short list of things I learned while making this blog: improving the display of notebook with some CSS hack, a markdown trick and some bokeh suggestions. 
