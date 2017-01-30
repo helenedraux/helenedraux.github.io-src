@@ -3,8 +3,8 @@
 {% block head %}
 {{ super() }}
 <meta name="description" content="{{ article.summary|striptags }}">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
-<script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.3.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/jquery-1.12.4.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/bokeh-0.12.3.min.js"></script>
 <script src="{{ SITEURL }}/theme/js/custom.js"></script>
 {% endblock %}
 
@@ -48,12 +48,14 @@
   </header>
   <hr>
   <div class="content">
-  {% if article.toc %}
-      <div class="col-lg-3 hidden-xs hidden-sm">
-      {{article.toc}}
-  </div>
-{% endif %}
-    {{ article.content }}
+    <div class="row">
+      <!-- https://afeld.github.io/bootstrap-toc/:sidebar, which will move to the top on a small screen -->
+      <!--div class="col-sm-3">
+        <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+      </div>
+      <div class="col-sm-9"-->
+        {{ article.content }}
+      <!--/div-->    
   </div>
 </article>
 {% include 'include/comments.html' %}
@@ -69,7 +71,9 @@
                       <div class="col-sm-4 card-wrapper">
                           <div class="card related-art">
                             <a href="{{ SITEURL }}/{{ related_post.url }}">
+                            <div class="image relatedimage">
                               <img class="card-img-top img-responsive img-feat-rel" src="{{ related_post.metadata.image }}">
+                            </div>
                             </a>
                             <div class="card-block">
                                 <h4 class="card-title"><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></h4>

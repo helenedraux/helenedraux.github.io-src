@@ -41,13 +41,22 @@ EXTRA_PATH_METADATA = {
 MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup','pelican-bootstrapify','related_posts']
+PLUGINS = ['ipynb.markup','pelican-bootstrapify','related_posts']#,'pelican-toc']
 
 BOOTSTRAPIFY = {
     'table': ['table', 'table-striped', 'table-hover'],
     'img': ['img-fluid'],
     'blockquote': ['blockquote'],
 }
+
+TOC = {
+    'TOC_HEADERS' : '^h[1-2]',  # What headers should be included in the generated toc
+                                # Expected format is a regular expression
+
+    'TOC_RUN'     : 'false'      # Default value for toc generation, if it does not evaluate
+                                # to 'true' no toc will be generated
+}
+
 
 #MARKDOWN = ['toc']
 
