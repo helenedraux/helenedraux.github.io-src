@@ -1,10 +1,11 @@
 Title: Tropical Neglected Disease
 Date: 2017-01-24 12:14
 Category: Analysis
-Tags: R, epidemiology
+Tags: R, epidemiology, carto, Tableau
 Slug: tropical-neglected-disease
-Summary: 
-Status: 
+Summary:
+Status:
+Description: Analysis of global trends in Tropical Neglected Diseases. Cluster and spatial analysis using R. Visualisation on Carto, R, and Tableau.
 Image: /images/analysis_ntd/carto.png
 
 
@@ -34,7 +35,7 @@ Neglected Tropical Diseases (NTDs) are transmitted by flies, rabids, worms, or o
 <tr><th scope="row">9</th><td>Buruli ulcer</td><td>Infection</td><td>?</td><td>Skin ulcer</td></tr>
 </table>
 
-Some countries have managed to eradicate some NTDs (e.g. Mexico eradicated onchocerciasis), but NTDs are still endemic in many countries. Cutaneous leishmaniasis, also called the Aleppo boil, seem to be coming back in 2016, principally in refugees fleeing Middle Eastern countries. 
+Some countries have managed to eradicate some NTDs (e.g. Mexico eradicated onchocerciasis), but NTDs are still endemic in many countries. Cutaneous leishmaniasis, also called the Aleppo boil, seem to be coming back in 2016, principally in refugees fleeing Middle Eastern countries.
 
 ### Available data
 
@@ -105,7 +106,7 @@ I used the `gdal` package to load the shapefiles downloaded at Natural Earth. Sh
 
 I downloaded the number of cases of all the diseases available on the WHO website. Not all the countries had been spelt the same way, so I first joined the dataframe of the shapefile and the data from WHO to find out which countries did not match:
 
-`wj1 <- full_join(world_name@data,rabies,by="Country")`. 
+`wj1 <- full_join(world_name@data,rabies,by="Country")`.
 
 I changed semi-manually the country names to match the Natural Earth dataset.
 
@@ -133,7 +134,7 @@ The population size has a large effect on the number of cases in each country. A
 	w8$rabies_norm <- 1000000*w8$rabies/w8$pop_est
 
 Considering rabies for instance, normalising by population change the top 3 from:
-	
+
 	China, Philippines, Vietnam
 
 to:
@@ -143,7 +144,7 @@ to:
 
 ## Visualise change with Tableau
 
-I used [Tableau](tableau) to visualise change over time. The three graphs below correspond to the countries that have had the most change in the data available: Uganda, Mali, and Benin. 
+I used [Tableau](tableau) to visualise change over time. The three graphs below correspond to the countries that have had the most change in the data available: Uganda, Mali, and Benin.
 
 The embedded dashboard is interactive; it is possible to filter by Country, disease, and years to allow more exploration. The legend is also interactive, so click on any disease's name to highlight it.
 
@@ -175,7 +176,7 @@ Countries are not affected in the same way by NTDs - some have multiple (up to 5
 	w8$rabies_yes[w8$rabies != 0] <- 1
 	w8$rabies_yes[w8$rabies == 0 | is.na(w8$rabies)] <- 0
 
-	w8$nb_diseases <- w8$rabies_yes + w8$leprosy_yes + w8$onchocerciasis_yes + 
+	w8$nb_diseases <- w8$rabies_yes + w8$leprosy_yes + w8$onchocerciasis_yes +
 	            w8$vleishmaniasis_yes + w8$cleishmaniasis_yes + w8$tbrhodesiense_yes +
 	            w8$dracunculiasis_yes + w8$buruli_ulcer_yes
 	# when needed remove the columns "_yes"
@@ -195,7 +196,7 @@ Transmittion of the NTDs varies (see Table 1), but there are constant - for one 
 
 ### arules
 
-I used a data mining technique called 'frequent itemset mining' and used the `arules` package for R. The package was created to mine 'items' bought together during a 'transaction'. Here the transactions are the countries and the items are the NTDs. 
+I used a data mining technique called 'frequent itemset mining' and used the `arules` package for R. The package was created to mine 'items' bought together during a 'transaction'. Here the transactions are the countries and the items are the NTDs.
 
 	:::R
 	# Select only the columns of interest
@@ -209,11 +210,11 @@ I used a data mining technique called 'frequent itemset mining' and used the `ar
 	ntd_group_trans <- ntd_group[, -( grep("_yes$" , colnames(ntd_group),perl = TRUE) ) ]
 
 	# Create transaction
-	ntd_transactions <- as(ntd_group_trans, "transactions") 
+	ntd_transactions <- as(ntd_group_trans, "transactions")
 
-I first ran an 'apriori' rule 
+I first ran an 'apriori' rule
 
-`is <- apriori(trans, parameter=list(target="frequent", support=0.005))` 
+`is <- apriori(trans, parameter=list(target="frequent", support=0.005))`
 
 to find the frequent NTDs. I obtained the following result:
 
@@ -231,9 +232,9 @@ to find the frequent NTDs. I obtained the following result:
 
 The first three are single NTDs. Leprosy is the disease the most widespread, so it is not surprising to find it as the most frequent here. If we go down to the 4th item, we find 'Leprosy' and 'cleishmaniasis' (Cutaneous Leishmaniasis), then 'cleishmaniasis' and 'vleishmaniasis' (Visceral Leishmaniasis), and then 'Leprosy' and 'vleishmaniasis'. These are the three most spread diseases across countries, with relative similar co-occurence. Nothing very surprising here, since Leprosy is the most widespread, and Cutaneous Leishmaniasis and Visceral Leishmaniasis come from the same type of infection. If anything, this can tell us at least, that they are indeed co-occurent!
 
-Finally I ran another 'apriori' rule to find which presence of NTD would imply another one: 
+Finally I ran another 'apriori' rule to find which presence of NTD would imply another one:
 
-`rules <- apriori(trans, parameter=list(support=0.05, confidence=.9))`. 
+`rules <- apriori(trans, parameter=list(support=0.05, confidence=.9))`.
 
 The top three association rules are:
 
@@ -244,7 +245,7 @@ The top three association rules are:
 
 with *lhs* for left-hand-side and *rhs* for right-hand-side. The occurence of the first implying the occurence of the latter.
 
-The confindence value of rule [1] and rule [2] being 1, this means that where there is onchocerciasis and Tb gambiense or onchocerciasis and Buruli ulcer, 100% of the times there is leprosy. The lift here indicates that they are independant, which means that these two left 
+The confindence value of rule [1] and rule [2] being 1, this means that where there is onchocerciasis and Tb gambiense or onchocerciasis and Buruli ulcer, 100% of the times there is leprosy. The lift here indicates that they are independant, which means that these two left
 
 Therefore, in countries where there is Onchocerciasis and Tb gambiense, Onchocerciasis and Buruli ulcer, or Buruli ulcer, it is likely (confidence close to 1) that there is leprosy also. Since leprosy affects three times more countries than the other NTDs, it would be wise to remove it from further analysess.
 
@@ -267,12 +268,12 @@ Since some countries struggle with multiple diseases, I calculated the total num
 	                                    100*world_data@data$infected/world_data@data$pop_est,NA)
 
 Looking at the number of people infected per country, we can isolate 14 countries for which 10 to 50% of the population is affected by one NTD.
-	
+
 	:::R
-	highincidence <- subset(world_data@data,incidence >10 & !is.na(incidence), 
+	highincidence <- subset(world_data@data,incidence >10 & !is.na(incidence),
 	select=c(Country, pop_est, incidence,nb_diseases))
 
-	# Top countries where 10 to 50% of the population is affected by 
+	# Top countries where 10 to 50% of the population is affected by
 	# an NTD.
 	highincidence[order(-highincidence$incidence),]
 
@@ -285,7 +286,7 @@ Every country in this top 14 is in Africa! Although Asia and South America are a
 I ran some simple statistics to find the total number of people affected, the mean, and the standard deviation. For that, I used the `ddply` package in R.
 
 	:::R
-	ntd_stats_summ <- ddply(melted, c("variable"), 
+	ntd_stats_summ <- ddply(melted, c("variable"),
 	      summarise, total = sum(value,na.rm=T),
 	      mean = round(mean(value,na.rm=T),2), sd = round(sd(value,na.rm=T),2),
 	      sd_per = round(100*sd(value,na.rm=T)/mean(value,na.rm=T),2))
@@ -298,7 +299,7 @@ This resulted in the following table:
 
 ## Influence of some economic variables
 
-I used a few economic variables to find if there was a relation between presence of NTDs and GDP, economy, and income grp. These were variables easy to find in the Natural Earth dataset. I used a **linear model** in a first instance, but there was no significant relationship between the total number of people affected by NTDs in these countries and their income. 
+I used a few economic variables to find if there was a relation between presence of NTDs and GDP, economy, and income grp. These were variables easy to find in the Natural Earth dataset. I used a **linear model** in a first instance, but there was no significant relationship between the total number of people affected by NTDs in these countries and their income.
 
 
 # 4. Spatial analysis
@@ -316,8 +317,8 @@ I used the point data LF Avg Prevalence (%), which consists of 7,000 points.
 Mapping a density of points can help finding 'hotspots' where cases of Lymphatic Filariasis are frequent. The package `spatstat` provides with a simple `density` function.
 
 	:::R
-	spatialpoints <- as(SpatialPoints(LF_2016), "ppp") 
-	LF_density <- density(spatialpoints, adjust = 0.3) 
+	spatialpoints <- as(SpatialPoints(LF_2016), "ppp")
+	LF_density <- density(spatialpoints, adjust = 0.3)
 
 Then, by transforming the density into contour lines and keeping the most inner clustered points, we obtain the following map:
 
@@ -335,7 +336,7 @@ I used [carto](www.carto.com) to show the informations I had created. First the 
 
 	:::R
 	# Select only the Tropics
-	tropics <- geographicline %>% 
+	tropics <- geographicline %>%
 	  filter(grepl('^Tropic', geographicline@data$name))
 
 ### Convert to geojson with geojsonio
@@ -395,7 +396,3 @@ Click on the image below to see the interactive map.
 ## Epidemiology reads
 
 * [Kaplan videos](https://www.youtube.com/channel/UChp6nkkF9KpJqCaTMYFwnNA/search?query=epidemiology)
-
-
-
-
