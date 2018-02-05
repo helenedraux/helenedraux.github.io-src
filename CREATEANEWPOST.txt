@@ -1,6 +1,5 @@
 MAKE A NEW POST
 1. Create a *.md file with the generatePost.py script: 
 python generatePost.py "locationnewoffice" 
-2. Once written, update content with `pelican content` in the `pelicanblog` folder
-3. cd to the output folder
-4. python3 -m pelican.server
+2. The publish with:
+bash publish-n-push.sh "commit"
